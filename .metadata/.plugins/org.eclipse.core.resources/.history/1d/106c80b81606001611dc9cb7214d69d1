@@ -1,0 +1,44 @@
+package Lab4;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class ClosestPair {
+	ArrayList<Distance> distances;
+		ArrayList<Position> positions;
+	public ClosestPair(ArrayList<Position> positions){
+		this.positions=positions;
+		distances = new ArrayList<Distance>();
+	}
+	public void fillDistances(){
+		while(positions.size()!=1){
+			Position currentPosition = positions.get(0);
+			for(int i = 1; i<positions.size(); i++){
+				distances.add(new Distance(currentPosition, positions.get(i)));
+			}
+			positions.remove(0);
+		}
+	}
+	public ArrayList<Position> sortByX(ArrayList<Position> positions){
+		for(Position p : positions){
+			p.sortByX();
+		}
+		Collections.sort(positions);
+		return positions;
+	}
+public ArrayList<Position> sortByY(ArrayList<Position> positions){
+	for(Position p : positions){
+		p.sortByY();
+	}
+	Collections.sort(positions);
+	return positions;
+	}
+	public float closestDistance(ArrayList<Position> xP, ArrayList<Position> yP){
+		if(xP.size()<=3){
+			float distance1 = xP.get(0).distanceTo(xP.get(1));
+			float distance2 = xP.get(0).distanceTo(xP.get(2));
+			float distance3 = xP.get(1).distanceTo(xP.get(2));
+		}
+		
+		return 0;
+	}}

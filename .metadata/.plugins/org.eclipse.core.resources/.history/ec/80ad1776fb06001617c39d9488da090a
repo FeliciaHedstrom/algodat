@@ -1,0 +1,19 @@
+package Lab4;
+
+import java.util.ArrayList;
+
+public class Main4 {
+	public static void main(String[] args) {
+		Reader reader = new Reader(args[0]);
+		reader.readFile();
+		ArrayList<Position> positions = reader.getPostitions();
+		ClosestPair cp = new ClosestPair(positions);
+		Distance d = cp.closestDistance(cp.sortByX(positions), cp.sortByY(positions));
+		String out = d.getInfo().substring(0, d.getInfo().length()-2);
+		System.out.println(out);
+//		for (Position p : positions) {
+//			System.out.println(p.getInfo());
+//		}
+	}
+
+}

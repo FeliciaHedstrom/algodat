@@ -1,0 +1,88 @@
+package Lab4;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class ClosestPair {
+	ArrayList<Distance> distances;
+		ArrayList<Position> positions;
+	public ClosestPair(ArrayList<Position> positions){
+		this.positions=positions;
+		distances = new ArrayList<Distance>();
+	}
+	public void fillDistances(){
+		while(positions.size()!=1){
+			Position currentPosition = positions.get(0);
+			for(int i = 1; i<positions.size(); i++){
+				distances.add(new Distance(currentPosition, positions.get(i)));
+			}
+			positions.remove(0);
+		}
+	}
+	public ArrayList<Position> sortByX(ArrayList<Position> positions){
+		for(Position p : positions){
+			p.sortByX();
+		}
+		Collections.sort(positions);
+		return positions;
+	}
+public ArrayList<Position> sortByY(ArrayList<Position> positions){
+	for(Position p : positions){
+		p.sortByY();
+	}
+	Collections.sort(positions);
+	return positions;
+	}
+	public float closestDistance(){
+		
+		
+		return 0;
+	}
+//	public ArrayList<Float> sort(ArrayList<Float> list){
+//		   if (list.size() <= 1) {
+//	            return list;
+//	        }
+//		   System.out.println("The list: " + list);
+//		   ArrayList<Float> first = new ArrayList<Float>();
+//		   ArrayList<Float> second = new ArrayList<Float>();
+//		   for(int i = 0; i<list.size(); i++){
+//			   if(i<(list.size()/2)){
+//				   first.add(list.get(i));
+//			   }else{
+//				   second.add(list.get(i));
+//			   }
+//		   }
+//			   sort(first);
+//			   sort(second);
+//			   
+//			   merge(first, second, list);
+//			   return list;
+//		   
+//		
+//	}
+//	public void merge(ArrayList<Float> first, ArrayList<Float> second, ArrayList<Float> result){
+//		int firstCount = 0;
+//		int secondCount = 0;
+//		int resultCount=0;
+//		System.out.println("Second list: " + second);
+//		
+//		while(firstCount < first.size() && secondCount<second.size()){
+//			if(first.get(firstCount).compareTo(second.get(secondCount))<0){
+//				result.add(resultCount, first.get(firstCount));
+//				System.out.println("first: " + first.get(firstCount));
+//
+//				firstCount++;
+//			}else{
+//				result.add(resultCount, second.get(secondCount));
+//				System.out.println("second: " + second.get(secondCount));
+//				secondCount++;
+//			}
+//			resultCount++;
+//		}
+//		result.addAll(first.subList(firstCount, first.size()));
+//		result.addAll(second.subList(secondCount, second.size()));
+//		
+//
+//
+//	}
+}

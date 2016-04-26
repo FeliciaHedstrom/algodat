@@ -1,0 +1,33 @@
+package Lab4;
+
+public class Distance implements Comparable<Object>{
+	Position p1;
+	Position p2;
+
+	public Distance(Position p1, Position p2) {
+		this.p1 = p1;
+		this.p2 = p2;
+
+	}
+
+	public float getDistance() {
+		float dX = Math.abs(p1.getX() - p2.getX());
+		float dY = Math.abs(p1.getY() - p2.getY());
+		float distance = (float) Math.hypot(dX, dY);
+		return distance;
+
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		if(o instanceof Distance){
+			if(getDistance()<((Distance) o).getDistance()){
+				return -1;
+			}else{
+				return 1;
+			}
+		}
+		return 0;
+	}
+
+}

@@ -1,0 +1,25 @@
+package Lab4;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class SortTest {
+	public static void main(String[] args) {
+
+		ArrayList<Float> list = new ArrayList<Float>();
+		Position p = new Position(2, 3, "Name");
+		Position q = new Position(5, 9, "Name");
+		Position r = new Position(2, 4, "Name");
+		Position s = new Position(4, 3, "Name");
+		ArrayList<Position> positions = new ArrayList<Position>();
+		ClosestPair cp = new ClosestPair(positions);
+		positions.add(p);
+		positions.add(q);
+		positions.add(r);
+		positions.add(s);
+		Collections.sort(positions);
+		for(Position a :positions){
+		System.out.println(a.getX());
+		}
+	}
+}

@@ -1,0 +1,115 @@
+package Lab4;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class ClosestPair {
+	ArrayList<Distance> distances;
+	ArrayList<Position> positions;
+
+	public ClosestPair(ArrayList<Position> positions) {
+		this.positions = positions;
+		distances = new ArrayList<Distance>();
+	}
+
+	public void fillDistances() {
+		while (positions.size() != 1) {
+			Position currentPosition = positions.get(0);
+			for (int i = 1; i < positions.size(); i++) {
+				distances.add(new Distance(currentPosition, positions.get(i)));
+			}
+			positions.remove(0);
+		}
+	}
+
+	public ArrayList<Position> sortByX(ArrayList<Position> positions) {
+		for (Position p : positions) {
+			p.sortByX();
+		}
+		Collections.sort(positions);
+		return positions;
+	}
+
+	public ArrayList<Position> sortByY(ArrayList<Position> positions) {
+		for (Position p : positions) {
+			p.sortByY();
+		}
+		Collections.sort(positions);
+		return positions;
+	}
+
+	public Distance closestDistance(ArrayList<Position> xP, ArrayList<Position> yP) {
+		System.out.println("xP size: " + xP.size());
+		if (xP.size() <= 3) {
+			if(xP.size()==2){
+				System.out.println("Size = 2");
+				return new Distance(xP.get(0), xP.get(1));
+			}
+			Distance distance1 = new Distance(xP.get(0), xP.get(1));
+			Distance distance2 = new Distance(xP.get(0), xP.get(2));
+			Distance distance3 = new Distance(xP.get(1), xP.get(2));
+			if (distance1.getDistance() < distance2.getDistance()) {
+				if (distance1.getDistance() < distance3.getDistance()) {
+					return distance1;
+				} else {
+					return distance3;
+				}
+			} else {
+				if (distance2.getDistance() < distance3.getDistance()) {
+					return distance2;
+				} else {
+					return distance3;
+				}
+			}
+		}
+		ArrayList<Position> xR = new ArrayList<Position>();
+		for (int i = ((xP.size() / 2)); i < xP.size(); i++) {
+			xR.add(xP.get(i));
+		}
+		System.out.println("xR size: " + xR.size());
+		ArrayList<Position> xL = new ArrayList<Position>();
+		for (int i = 0; i < (xP.size() / 2); i++) {
+			xL.add(xP.get(i));
+		}
+		float xM = xP.get(xP.size() / 2).getX();
+		ArrayList<Position> yR = new ArrayList<Position>();
+		ArrayList<Position> yL = new ArrayList<Position>();
+		for (Position p : yP) {
+			if (p.getX() > xM) {
+				yR.add(p);
+			} else {
+				yL.add(p);
+			}
+		}
+		System.out.println("Size xL: " +xL.size());
+		Distance dL = closestDistance(xL, yL);
+		System.out.println("Size xR: " +xR.size());
+		Distance dR = closestDistance(xR, yR);
+		Distance dMin = dR;
+		if (dL.getDistance() < dR.getDistance()) {
+			dMin = dL;
+		}
+		ArrayList<Position> yS = new ArrayList<Position>();
+		for (Position p : yP) {
+			if (Math.abs(xM - p.getX()) < dMin.getDistance()) {
+				yS.add(p);
+			}
+		}
+		ArrayList<Distance> ySDistances = new ArrayList<Distance>();
+		if(yS.size()>=1){
+		while (yS.size() > 1) {
+			Position first = yS.get(0);
+			yS.remove(0);
+			for (Position p : yS) {
+				ySDistances.add(new Distance(first, p));
+			}
+		}
+		Collections.sort(ySDistances);
+		Distance ySMin = ySDistances.get(0);
+		if (ySMin.getDistance() < dMin.getDistance()) {
+			dMin = ySMin;
+		}
+		}
+		return dMin;
+	}
+}

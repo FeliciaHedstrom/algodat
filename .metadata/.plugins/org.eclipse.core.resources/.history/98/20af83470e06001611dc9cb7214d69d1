@@ -1,0 +1,26 @@
+package Lab4;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class SortTest {
+	public static void main(String[] args) {
+
+		ArrayList<Float> list = new ArrayList<Float>();
+		Position p = new Position(2, 3, "Name");
+		Position p = new Position(2, 3, "Name");
+		Position p = new Position(2, 3, "Name");
+		Position p = new Position(2, 3, "Name");
+		ArrayList<Position> positions = new ArrayList<Position>();
+		positions.add(p);
+		ClosestPair cp = new ClosestPair(positions);
+		list.add((float) 2);
+		list.add((float) 5);
+		list.add((float) 8);
+		list.add((float) 1);
+		list.add((float) 1);
+		Collections.sort(positions);
+		System.out.println(cp.sort(list));
+
+	}
+}
